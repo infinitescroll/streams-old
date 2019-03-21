@@ -8,9 +8,11 @@
   },
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
+    "bootstrap": "^4.3.1",
     "next": "^8.0.3",
     "node-sass": "^4.11.0",
     "react": "^16.8.4",
+    "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.4",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",

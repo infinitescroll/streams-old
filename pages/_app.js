@@ -3,13 +3,17 @@ import React from 'react'
 import withReduxStore from '../lib/with-redux-store'
 import { Provider } from 'react-redux'
 
+import Layout from '../components/Layout'
+
 class MyApp extends App {
-  render () {
+  render() {
     const { Component, pageProps, reduxStore } = this.props
     return (
       <Container>
         <Provider store={reduxStore}>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </Provider>
       </Container>
     )
