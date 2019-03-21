@@ -1,4 +1,5 @@
 import App, { Container } from 'next/app'
+import Head from 'next/head'
 import React from 'react'
 import withReduxStore from '../lib/with-redux-store'
 import { Provider } from 'react-redux'
@@ -10,6 +11,9 @@ class MyApp extends App {
     const { Component, pageProps, reduxStore } = this.props
     return (
       <Container>
+        <Head>
+          <title>Open Work Labs</title>
+        </Head>
         <Provider store={reduxStore}>
           <Layout>
             <Component {...pageProps} />

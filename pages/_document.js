@@ -14,8 +14,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>Open Work Labs</title>
-
           <meta charset="utf-8" />
           <meta
             name="viewport"
