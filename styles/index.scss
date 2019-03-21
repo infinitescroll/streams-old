@@ -73,9 +73,10 @@
 }
 
 .first-paragraph {
+  letter-spacing: 0.5pt;
+
   @media (max-width: 991.98px) {
     margin-bottom: 20px;
-    letter-spacing: 0.5pt;
   }
 
   @media (min-width: 992px) {
@@ -84,15 +85,15 @@
 }
 
 .second-paragraph {
+  letter-spacing: 0.5pt;
+
   @media (max-width: 991.98px) {
     margin-bottom: 150px;
-    letter-spacing: 0.5pt;
   }
 
   @media (min-width: 992px) {
     padding-bottom: 20px;
     padding-right: 80px;
-    letter-spacing: 0.5pt;
   }
 }
 
@@ -133,6 +134,10 @@
 }
 
 .logo {
+  height: 150px;
+  margin-bottom: 30px;
+  margin-top: 70px;
+
   .cls-1 {
     fill: #74fbe7;
   }

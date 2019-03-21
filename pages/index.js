@@ -69,7 +69,6 @@ export default class Home extends PureComponent {
           </div>
         </Col>
         <Col
-          bsPrefix="order-first"
           lg={{ span: 5, order: 12 }}
           md={{ span: 12, order: 1 }}
           className="right-panel"
