@@ -5,7 +5,14 @@ module.exports = {
     commonjs: true,
   },
   parser: 'babel-eslint',
-  extends: 'fullstack',
+  extends: [
+    "standard",
+    "standard-react",
+    "prettier",
+    "prettier/standard",
+    "prettier/react"
+  ],
+  plugins: ["prettier", "react", "react-hooks"],
   parserOptions: {
     ecmaVersion: 9,
     ecmaFeatures: {
@@ -13,12 +20,21 @@ module.exports = {
     },
     sourceType: 'module',
   },
-  plugins: ['react'],
-  rules: {
-    'react/prop-types': 0,
-    'react/jsx-uses-vars': [2],
-    'no-console': 0,
-    semi: [1, 'never'],
-    'react/jsx-child-element-spacing': 0,
-  },
+  "rules": {
+    "valid-jsdoc": "error",
+    "react/prop-types": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": false,
+        "trailingComma": "es5",
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false
+      }
+    ],
+    "linebreak-style": ["error", "unix"]
+  }
 }

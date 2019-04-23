@@ -1,14 +1,15 @@
-import App, { Container } from 'next/app'
-import Head from 'next/head'
-import React from 'react'
-import withReduxStore from '../lib/with-redux-store'
-import { Provider } from 'react-redux'
+import App, { Container } from "next/app";
+import Head from "next/head";
+import React from "react";
+import withReduxStore from "../lib/with-redux-store";
+import { Provider } from "react-redux";
 
-import Layout from '../components/Layout'
+import Layout from "../components/Layout";
+import ValidateTextile from "../components/wrappers/ValidateTextile";
 
 class MyApp extends App {
   render() {
-    const { Component, pageProps, reduxStore } = this.props
+    const { Component, pageProps, reduxStore } = this.props;
     return (
       <Container>
         <Head>
@@ -16,12 +17,14 @@ class MyApp extends App {
         </Head>
         <Provider store={reduxStore}>
           <Layout>
-            <Component {...pageProps} />
+            <ValidateTextile>
+              <Component {...pageProps} />
+            </ValidateTextile>
           </Layout>
         </Provider>
       </Container>
-    )
+    );
   }
 }
 
-export default withReduxStore(MyApp)
+export default withReduxStore(MyApp);
