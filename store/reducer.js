@@ -20,6 +20,7 @@ import {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGED_INPUT: {
+      console.log("changing");
       return changedInput(state, action.title, action.name, action.val);
     }
     case REQUESTED_NEW_THREAD: {
