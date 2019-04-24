@@ -1,15 +1,21 @@
 const initialState = {
-  threads: {},
+  threads: {
+    items: {},
+    requesting: false,
+    requestingSuccess: false,
+    requestingError: false,
+    error: null
+  },
   peers: {},
   profile: {
-    loading: false,
-    loadedSuccess: false,
-    loadedError: false,
+    requesting: false,
+    requestingSuccess: false,
+    requestingError: false,
     error: null,
-    id: ""
+    id: ''
   },
   forms: {
-    newThread: ""
+    newThread: ''
   }
 };
 
@@ -55,7 +61,10 @@ export const requestedNewThreadSuccess = (state, peerId, thread) => {
     },
     threads: {
       ...state.threads,
-      [id]: thread
+      items: {
+        ...state.threads.items,
+        [id]: thread
+      }
     }
   };
 };
@@ -103,6 +112,55 @@ export const requestedProfileSuccess = (state, profile) => ({
 });
 
 export const requestedProfileError = (state, error) => ({
+  ...state,
+  profile: {
+    ...state.profile,
+    requesting: false,
+    requestedSuccess: false,
+    requestedError: true,
+    error
+  }
+});
+
+export const requestedThreads = state => ({
+  ...state,
+  threads: {
+    ...state.threads,
+    requesting: true,
+    requestedSuccess: false,
+    requestedError: false,
+    error: null
+  }
+});
+
+const constructThreads = items => {
+  const obj = {};
+  items.forEach(item => {
+    obj[item.id] = item;
+  });
+
+  return obj;
+};
+
+export const requestedThreadsSuccess = (state, threads) => {
+  const constructedThreads = constructThreads(threads.items);
+  return {
+    ...state,
+    threads: {
+      ...state.threads,
+      requesting: false,
+      requestedSuccess: true,
+      requestedError: false,
+      items: {
+        ...state.threads.items,
+        ...constructedThreads
+      },
+      error: null
+    }
+  };
+};
+
+export const requestedThreadsError = (state, error) => ({
   ...state,
   profile: {
     ...state.profile,
