@@ -1,4 +1,5 @@
 import React from "react";
+import { Col, Row, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -8,25 +9,40 @@ import {
 } from "../store/actions";
 import { textile } from "../textile";
 import "../styles/index.scss";
+import Input from "../components/input";
 
 const Streams = ({
   requestingNewThread,
   requestedNewThreadSuccess,
   requestedNewThreadError,
-  profile
+  profile,
+  thread
 }) => {
   const createThread = async () => {
     requestingNewThread(profile.id);
     try {
-      const thread = await textile.threads.add("new new");
-      requestedNewThreadSuccess(profile.id, thread);
+      console.log("thread", thread);
+      const newThread = await textile.threads.add(thread.newThread);
+      requestedNewThreadSuccess(profile.id, newThread);
     } catch (error) {
       requestedNewThreadError(profile.id, error);
     }
   };
   return (
     <div>
-      <button onClick={createThread}>add thread</button>
+      <Row>
+        <Col lg={8} lgoffset={4}>
+          <Input
+            controlLabel="New Thread"
+            type="Text"
+            title="thread"
+            name="newThread"
+          />
+        </Col>
+        <Col lg={8} lgoffset={4}>
+          <Button onClick={createThread}>Add</Button>
+        </Col>
+      </Row>
     </div>
   );
 };
@@ -43,9 +59,10 @@ Streams.defaultProps = {
   profile: {}
 };
 
-const mapStateToProps = ({ peers, profile }) => ({
+const mapStateToProps = ({ peers, profile, thread }) => ({
   peers,
-  profile
+  profile,
+  thread
 });
 
 export default connect(

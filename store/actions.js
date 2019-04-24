@@ -4,7 +4,8 @@ import {
   REQUESTED_NEW_THREAD_ERROR,
   REQUESTED_PROFILE,
   REQUESTED_PROFILE_SUCCESS,
-  REQUESTED_PROFILE_ERROR
+  REQUESTED_PROFILE_ERROR,
+  CHANGED_INPUT
 } from "./actionTypes";
 
 export const requestingNewThread = address => ({
@@ -36,4 +37,11 @@ export const requestedProfileSuccess = profile => ({
 export const requestedProfileError = error => ({
   type: REQUESTED_PROFILE_ERROR,
   error
+});
+
+export const changedInput = (title, name, val) => ({
+  type: CHANGED_INPUT,
+  title,
+  name,
+  val
 });

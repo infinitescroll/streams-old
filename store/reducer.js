@@ -4,7 +4,8 @@ import initialState, {
   requestedNewThreadError,
   requestedProfile,
   requestedProfileSuccess,
-  requestedProfileError
+  requestedProfileError,
+  changedInput
 } from "./states";
 import {
   REQUESTED_NEW_THREAD,
@@ -12,11 +13,15 @@ import {
   REQUESTED_NEW_THREAD_ERROR,
   REQUESTED_PROFILE,
   REQUESTED_PROFILE_SUCCESS,
-  REQUESTED_PROFILE_ERROR
+  REQUESTED_PROFILE_ERROR,
+  CHANGED_INPUT
 } from "./actionTypes";
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case CHANGED_INPUT: {
+      return changedInput(state, action.title, action.name, action.val);
+    }
     case REQUESTED_NEW_THREAD: {
       return requestedNewThread(state, action.meta.address);
     }

@@ -110,4 +110,12 @@ export const requestedProfileError = (state, error) => ({
   }
 });
 
+export const changedInput = (state, title, name, val) => ({
+  ...state,
+  threads: {
+    ...state.threads
+  },
+  [title]: { ...state[title], [name]: val }
+});
+
 export default initialState;
