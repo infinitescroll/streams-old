@@ -7,6 +7,9 @@ const initialState = {
     loadedError: false,
     error: null,
     id: ""
+  },
+  forms: {
+    newThread: ""
   }
 };
 
@@ -110,12 +113,12 @@ export const requestedProfileError = (state, error) => ({
   }
 });
 
-export const changedInput = (state, title, name, val) => ({
+export const changedInput = (state, name, val) => ({
   ...state,
-  threads: {
-    ...state.threads
-  },
-  [title]: { ...state[title], [name]: val }
+  forms: {
+    ...state.forms,
+    [name]: val
+  }
 });
 
 export default initialState;

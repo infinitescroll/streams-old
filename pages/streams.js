@@ -16,13 +16,12 @@ const Streams = ({
   requestedNewThreadSuccess,
   requestedNewThreadError,
   profile,
-  thread
+  forms
 }) => {
   const createThread = async () => {
     requestingNewThread(profile.id);
     try {
-      console.log("thread", thread);
-      const newThread = await textile.threads.add(thread.newThread);
+      const newThread = await textile.threads.add(forms.newThread);
       requestedNewThreadSuccess(profile.id, newThread);
     } catch (error) {
       requestedNewThreadError(profile.id, error);
@@ -32,12 +31,7 @@ const Streams = ({
     <div>
       <Row>
         <Col lg={8} lgoffset={4}>
-          <Input
-            controlLabel="New Thread"
-            type="Text"
-            title="thread"
-            name="newThread"
-          />
+          <Input controlLabel="New Thread" name="newThread" />
         </Col>
         <Col lg={8} lgoffset={4}>
           <Button onClick={createThread}>Add</Button>
@@ -59,10 +53,10 @@ Streams.defaultProps = {
   profile: {}
 };
 
-const mapStateToProps = ({ peers, profile, thread }) => ({
+const mapStateToProps = ({ peers, profile, forms }) => ({
   peers,
   profile,
-  thread
+  forms
 });
 
 export default connect(

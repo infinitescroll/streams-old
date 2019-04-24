@@ -7,8 +7,8 @@ import { changedInput } from "../store/actions";
 
 class Input extends Component {
   changedInput = e => {
-    const { changedInput, title, name } = this.props;
-    changedInput(title, name, e.target.value);
+    const { changedInput, name } = this.props;
+    changedInput(name, e.target.value);
   };
 
   render() {

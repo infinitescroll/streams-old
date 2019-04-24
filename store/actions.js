@@ -39,9 +39,8 @@ export const requestedProfileError = error => ({
   error
 });
 
-export const changedInput = (title, name, val) => ({
+export const changedInput = (name, val) => ({
   type: CHANGED_INPUT,
-  title,
   name,
   val
 });
