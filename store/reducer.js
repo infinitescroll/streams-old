@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import initialState, {
   requestedNewThread,
   requestedNewThreadSuccess,
@@ -26,41 +28,45 @@ import {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGED_INPUT: {
-      return changedInput(state, action.name, action.val)
+      return changedInput(_.cloneDeep(state), action.name, action.val)
     }
     case REQUESTED_NEW_THREAD: {
-      return requestedNewThread(state, action.meta.address)
+      return requestedNewThread(_.cloneDeep(state), action.meta.address)
     }
     case REQUESTED_NEW_THREAD_SUCCESS: {
       return requestedNewThreadSuccess(
-        state,
+        _.cloneDeep(state),
         action.meta.address,
         action.payload.threadId
       )
     }
     case REQUESTED_NEW_THREAD_ERROR: {
-      return requestedNewThreadError(state, action.meta.address, action.error)
+      return requestedNewThreadError(
+        _.cloneDeep(state),
+        action.meta.address,
+        action.error
+      )
     }
     case REQUESTED_PROFILE: {
-      return requestedProfile(state)
+      return requestedProfile(_.cloneDeep(state))
     }
     case REQUESTED_PROFILE_SUCCESS: {
-      return requestedProfileSuccess(state, action.payload.profile)
+      return requestedProfileSuccess(_.cloneDeep(state), action.payload.profile)
     }
     case REQUESTED_PROFILE_ERROR: {
-      return requestedProfileError(state, action.error)
+      return requestedProfileError(_.cloneDeep(state), action.error)
     }
     case REQUESTED_THREADS: {
-      return requestedThreads(state)
+      return requestedThreads(_.cloneDeep(state))
     }
     case REQUESTED_THREADS_SUCCESS: {
-      return requestedThreadsSuccess(state, action.payload.threads)
+      return requestedThreadsSuccess(_.cloneDeep(state), action.payload.threads)
     }
     case REQUESTED_THREADS_ERROR: {
-      return requestedThreadsError(state, action.error)
+      return requestedThreadsError(_.cloneDeep(state), action.error)
     }
     default:
-      return state
+      return _.cloneDeep(state)
   }
 }
 
