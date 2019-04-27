@@ -8,7 +8,7 @@ import initialState, {
   requestedThreads,
   requestedThreadsSuccess,
   requestedThreadsError,
-  changedInput
+  changedInput,
 } from './states'
 import {
   REQUESTED_NEW_THREAD,
@@ -20,7 +20,7 @@ import {
   REQUESTED_THREADS,
   REQUESTED_THREADS_SUCCESS,
   REQUESTED_THREADS_ERROR,
-  CHANGED_INPUT
+  CHANGED_INPUT,
 } from './actionTypes'
 
 export const reducer = (state = initialState, action) => {

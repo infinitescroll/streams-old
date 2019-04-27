@@ -1,19 +1,18 @@
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useEffect } from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
 import {
   requestingThreads,
   requestedThreadsSuccess,
-  requestedThreadsError
+  requestedThreadsError,
 } from '../store/actions'
-import Clock from './clock'
 import { textile } from '../textile'
 
 const ThreadList = ({
   requestingThreads,
   requestedThreadsSuccess,
   requestedThreadsError,
-  profile
+  profile,
 }) => {
   useEffect(() => {
     const loadThreads = async () => {
@@ -27,7 +26,12 @@ const ThreadList = ({
     }
 
     loadThreads()
-  }, [])
+  }, [
+    profile.id,
+    requestedThreadsError,
+    requestedThreadsSuccess,
+    requestingThreads,
+  ])
 
   return (
     <Row className="custom-container">
@@ -42,7 +46,7 @@ const ThreadList = ({
 
 const mapStateToProps = ({ threads, profile }) => ({
   threads,
-  profile
+  profile,
 })
 
 export default connect(
@@ -50,6 +54,6 @@ export default connect(
   {
     requestingThreads,
     requestedThreadsSuccess,
-    requestedThreadsError
+    requestedThreadsError,
   }
 )(ThreadList)
