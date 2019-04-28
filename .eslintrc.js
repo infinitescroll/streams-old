@@ -24,7 +24,6 @@ module.exports = {
     'valid-jsdoc': 'error',
     'react/prop-types': 0,
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': [
       'error',
       {
@@ -37,4 +36,4 @@ module.exports = {
     ],
     'linebreak-style': ['error', 'unix'],
   },
-};
+}
