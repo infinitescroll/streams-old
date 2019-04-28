@@ -1,40 +1,33 @@
-import React, { Component } from 'react'
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
+import React from 'react'
+import { FormGroup, FormControl } from 'react-bootstrap'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 import { changedInput } from '../store/actions'
 
-class Input extends Component {
-  changedInput = e => {
-    const { changedInput, name } = this.props
+const Input = ({ changedInput, name, disabled, controlLabel, val, type }) => {
+  const onChange = async e => {
     changedInput(name, e.target.value)
   }
-
-  render() {
-    return (
-      <div>
-        <FormGroup controlId="formBasicText">
-          <FormControl
-            disabled={this.props.disabled}
-            type={this.props.type || 'Text'}
-            placeholder={this.props.controlLabel}
-            onChange={this.changedInput}
-            value={this.props.val}
-          />
-        </FormGroup>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <FormGroup controlId="formBasicText">
+        <FormControl
+          disabled={disabled}
+          type={type || 'Text'}
+          placeholder={controlLabel}
+          onChange={onChange}
+          value={val}
+        />
+      </FormGroup>
+    </div>
+  )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    changedInput: bindActionCreators(changedInput, dispatch)
-  }
+Input.propTypes = {
+  changedInput: PropTypes.func.isRequired
 }
 
 export default connect(
   null,
-  mapDispatchToProps
+  { changedInput }
 )(Input)
