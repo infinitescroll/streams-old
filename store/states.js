@@ -4,7 +4,7 @@ const initialState = {
     requesting: false,
     requestingSuccess: false,
     requestingError: false,
-    error: null
+    error: null,
   },
   peers: {},
   profile: {
@@ -12,20 +12,20 @@ const initialState = {
     requestingSuccess: false,
     requestingError: false,
     error: null,
-    id: ''
+    id: '',
   },
   forms: {
-    newThread: ''
-  }
-};
+    newThread: '',
+  },
+}
 
 const initialPeerState = {
   threads: new Set(),
   requestingNewThread: false,
   requestedNewThreadSuccess: false,
   requestedNewThreadError: false,
-  error: null
-};
+  error: null,
+}
 
 export const requestedNewThread = (state = initialState, peerId) => {
   return {
@@ -37,15 +37,15 @@ export const requestedNewThread = (state = initialState, peerId) => {
         requestingNewThread: true,
         requestedNewThreadSuccess: false,
         requestedNewThreadError: false,
-        error: null
-      }
-    }
-  };
-};
+        error: null,
+      },
+    },
+  }
+}
 
 export const requestedNewThreadSuccess = (state, peerId, thread) => {
-  const { id } = thread;
-  const threads = state.peers[peerId].threads;
+  const { id } = thread
+  const threads = state.peers[peerId].threads
   return {
     ...state,
     peers: {
@@ -56,18 +56,18 @@ export const requestedNewThreadSuccess = (state, peerId, thread) => {
         requestingNewThread: false,
         requestedNewThreadSuccess: true,
         requestedNewThreadError: false,
-        error: null
-      }
+        error: null,
+      },
     },
     threads: {
       ...state.threads,
       items: {
         ...state.threads.items,
-        [id]: thread
-      }
-    }
-  };
-};
+        [id]: thread,
+      },
+    },
+  }
+}
 
 export const requestedNewThreadError = (state, peerId, error) => {
   return {
@@ -79,11 +79,11 @@ export const requestedNewThreadError = (state, peerId, error) => {
         requestingNewThread: false,
         requestedNewThreadSuccess: false,
         requestedNewThreadError: true,
-        error
-      }
-    }
-  };
-};
+        error,
+      },
+    },
+  }
+}
 
 export const requestedProfile = state => ({
   ...state,
@@ -92,9 +92,9 @@ export const requestedProfile = state => ({
     requesting: true,
     requestedSuccess: false,
     requestedError: false,
-    error: null
-  }
-});
+    error: null,
+  },
+})
 
 export const requestedProfileSuccess = (state, profile) => ({
   ...state,
@@ -104,12 +104,12 @@ export const requestedProfileSuccess = (state, profile) => ({
     requestedSuccess: true,
     requestedError: false,
     ...profile,
-    error: null
+    error: null,
   },
   peers: {
-    [profile.id]: initialPeerState
-  }
-});
+    [profile.id]: initialPeerState,
+  },
+})
 
 export const requestedProfileError = (state, error) => ({
   ...state,
@@ -118,9 +118,9 @@ export const requestedProfileError = (state, error) => ({
     requesting: false,
     requestedSuccess: false,
     requestedError: true,
-    error
-  }
-});
+    error,
+  },
+})
 
 export const requestedThreads = state => ({
   ...state,
@@ -129,21 +129,21 @@ export const requestedThreads = state => ({
     requesting: true,
     requestedSuccess: false,
     requestedError: false,
-    error: null
-  }
-});
+    error: null,
+  },
+})
 
 const constructThreads = items => {
-  const obj = {};
+  const obj = {}
   items.forEach(item => {
-    obj[item.id] = item;
-  });
+    obj[item.id] = item
+  })
 
-  return obj;
-};
+  return obj
+}
 
 export const requestedThreadsSuccess = (state, threads) => {
-  const constructedThreads = constructThreads(threads.items);
+  const constructedThreads = constructThreads(threads.items)
   return {
     ...state,
     threads: {
@@ -153,12 +153,12 @@ export const requestedThreadsSuccess = (state, threads) => {
       requestedError: false,
       items: {
         ...state.threads.items,
-        ...constructedThreads
+        ...constructedThreads,
       },
-      error: null
-    }
-  };
-};
+      error: null,
+    },
+  }
+}
 
 export const requestedThreadsError = (state, error) => ({
   ...state,
@@ -167,16 +167,16 @@ export const requestedThreadsError = (state, error) => ({
     requesting: false,
     requestedSuccess: false,
     requestedError: true,
-    error
-  }
-});
+    error,
+  },
+})
 
 export const changedInput = (state, name, val) => ({
   ...state,
   forms: {
     ...state.forms,
-    [name]: val
-  }
-});
+    [name]: val,
+  },
+})
 
-export default initialState;
+export default initialState

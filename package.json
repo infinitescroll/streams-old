@@ -7,10 +7,11 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
-    "@textile/js-http-client": "^0.2.9",
+    "@textile/js-http-client": "^0.2.10",
     "@zeit/next-sass": "^1.0.1",
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "next": "^8.0.3",
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.10",
@@ -27,7 +28,9 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.15.3",
     "eslint-config-prettier": "^4.1.0",
+    "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-react": "^7.0.2",
+    "eslint-loader": "^2.1.2",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-prettier": "^3.0.1",

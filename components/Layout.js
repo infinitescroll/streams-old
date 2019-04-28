@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { Row } from 'react-bootstrap'
 
 import '../styles/layout.scss'
 

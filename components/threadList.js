@@ -1,4 +1,4 @@
-import { Row, Col, Card } from 'react-bootstrap'
+import { Row, Col, Card } from "react-bootstrap";
 
 export default ({ threads }) => {
   return (
@@ -9,9 +9,9 @@ export default ({ threads }) => {
             <Card key={id}>
               <div>{threads[id].name}</div>
             </Card>
-          )
+          );
         })}
       </Col>
     </Row>
-  )
-}
+  );
+};
