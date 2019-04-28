@@ -26,12 +26,7 @@ const ThreadList = ({
     }
 
     loadThreads()
-  }, [
-    profile.id,
-    requestedThreadsError,
-    requestedThreadsSuccess,
-    requestingThreads,
-  ])
+  }, [])
 
   return (
     <Row className="custom-container">
