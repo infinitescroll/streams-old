@@ -5,7 +5,7 @@ import Logo from '../components/Logo'
 
 import '../styles/index.scss'
 
-const Home = () => 
+const Home = () => (
   <Fragment>
     <Col
       lg={{ span: 7, order: -1 }}
@@ -42,8 +42,8 @@ const Home = () =>
               "We're also having conversations with researchers of existential threats like AI, climate change, poverty, and aging. If this is you, "
             }
             <a href="mailto:jpschwartz8990@gmail.com">we'd love to chat</a>.
-            We're trying to understand how we might help you archive or
-            share your work.
+            We're trying to understand how we might help you archive or share
+            your work.
           </p>
         </div>
       </div>
@@ -75,5 +75,6 @@ const Home = () =>
       <h2>Open Work Labs</h2>
     </Col>
   </Fragment>
+)
 
 export default Home

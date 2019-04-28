@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {
   requestingNewThread,
   requestedNewThreadSuccess,
-  requestedNewThreadError
+  requestedNewThreadError,
 } from '../store/actions'
 import { textile } from '../textile'
 import '../styles/index.scss'
@@ -16,7 +16,7 @@ const Streams = ({
   requestedNewThreadSuccess,
   requestedNewThreadError,
   profile,
-  forms
+  forms,
 }) => {
   const createThread = async () => {
     requestingNewThread(profile.id)
@@ -41,21 +41,20 @@ const Streams = ({
 }
 
 Streams.propTypes = {
-  peers: PropTypes.object.isRequired,
   requestingNewThread: PropTypes.func.isRequired,
   requestedNewThreadSuccess: PropTypes.func.isRequired,
   requestedNewThreadError: PropTypes.func.isRequired,
-  profile: PropTypes.object
+  profile: PropTypes.object,
 }
 
 Streams.defaultProps = {
-  profile: {}
+  profile: {},
 }
 
 const mapStateToProps = ({ peers, profile, forms }) => ({
   peers,
   profile,
-  forms
+  forms,
 })
 
 export default connect(
@@ -63,6 +62,6 @@ export default connect(
   {
     requestingNewThread,
     requestedNewThreadSuccess,
-    requestedNewThreadError
+    requestedNewThreadError,
   }
 )(Streams)

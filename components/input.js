@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
+import { FormGroup, FormControl } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -30,7 +30,7 @@ class Input extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changedInput: bindActionCreators(changedInput, dispatch)
+    changedInput: bindActionCreators(changedInput, dispatch),
   }
 }
 
