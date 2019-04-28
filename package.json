@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
-    "@textile/js-http-client": "^0.2.9",
+    "@textile/js-http-client": "^0.2.10",
     "@zeit/next-sass": "^1.0.1",
     "bootstrap": "^4.3.1",
     "express": "^4.16.4",
