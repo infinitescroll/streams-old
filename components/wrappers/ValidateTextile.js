@@ -22,7 +22,7 @@ const ValidateTextile = props => {
     }
 
     getProfile()
-  }, [props])
+  }, [])
 
   if (!props.profile.id && props.profile.requested)
     console.log('TEXTILE NODE PROBABLY NOT RUNNING')
