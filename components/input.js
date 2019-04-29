@@ -1,22 +1,20 @@
 import React from 'react'
-import { FormGroup, FormControl } from 'react-bootstrap'
+import { FormGroup, FormControl, FormLabel } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { changedInput } from '../store/actions'
 
-const Input = ({ changedInput, name, disabled, controlLabel, val, type }) => {
-  const onChange = async e => {
-    changedInput(name, e.target.value)
-  }
+const Input = ({ onChange, type, name, controlLabel, value, checked }) => {
   return (
     <div>
       <FormGroup controlId="formBasicText">
+        <FormLabel>{controlLabel}</FormLabel>
         <FormControl
-          disabled={disabled}
           type={type || 'Text'}
-          placeholder={controlLabel}
+          value={value}
+          name={name}
           onChange={onChange}
-          value={val}
+          checked={checked}
         />
       </FormGroup>
     </div>
@@ -24,7 +22,10 @@ const Input = ({ changedInput, name, disabled, controlLabel, val, type }) => {
 }
 
 Input.propTypes = {
-  changedInput: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  value: PropTypes.string,
 }
 
 export default connect(

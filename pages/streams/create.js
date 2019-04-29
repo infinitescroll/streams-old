@@ -20,9 +20,8 @@ const CreateStream = ({
   const createStream = async () => {
     requestedNewStream(profile.id)
     try {
-      const newStream = await streamService.create()
-      console.log('newStream', newStream)
-      requestedNewStreamSuccess(profile.id, newStream)
+      const stream = await streamService.create(forms.stream)
+      requestedNewStreamSuccess(profile.id, stream)
     } catch (error) {
       requestedNewStreamError(profile.id, error)
     }

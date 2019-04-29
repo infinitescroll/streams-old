@@ -17,6 +17,9 @@ const initialState = {
   forms: {
     stream: {
       name: '',
+      type: '',
+      sharing: '',
+      disabled: false,
     },
   },
 }
@@ -178,6 +181,17 @@ export const changedInput = (state, name, val) => ({
   forms: {
     ...state.forms,
     [name]: val,
+  },
+})
+
+export const changedStreamInput = (state, name, val) => ({
+  ...state,
+  forms: {
+    ...state.forms,
+    stream: {
+      ...state.forms.stream,
+      [name]: val,
+    },
   },
 })
 

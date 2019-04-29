@@ -9,6 +9,7 @@ import {
   REQUESTED_NEW_STREAM_SUCCESS,
   REQUESTED_NEW_STREAM_ERROR,
   CHANGED_INPUT,
+  CHANGED_STREAM_INPUT,
 } from './actionTypes'
 
 export const requestingProfile = () => ({
@@ -58,6 +59,12 @@ export const requestedStreamsError = error => ({
 
 export const changedInput = (name, val) => ({
   type: CHANGED_INPUT,
+  name,
+  val,
+})
+
+export const changedStreamInput = (name, val) => ({
+  type: CHANGED_STREAM_INPUT,
   name,
   val,
 })
