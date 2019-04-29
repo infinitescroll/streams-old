@@ -1,30 +1,31 @@
 import { connect } from 'react-redux'
 import React, { Fragment, useEffect } from 'react'
-import { ThreadList } from '../components/'
+import { StreamList } from '../components/'
 import {
-  requestingThreads,
-  requestedThreadsSuccess,
-  requestedThreadsError,
+  requestedStreams,
+  requestedStreamsSuccess,
+  requestedStreamsError,
 } from '../store/actions'
 import { textile } from '../textile'
 
 import '../styles/index.scss'
 
 const Home = ({
-  requestingThreads,
-  requestedThreadsSuccess,
-  requestedThreadsError,
+  requestedStreams,
+  requestedStreamsSuccess,
+  requestedStreamsError,
   profile,
-  threads,
+  streams,
 }) => {
   useEffect(() => {
     const loadThreads = async () => {
-      requestingThreads(profile.id)
+      requestedStreams(profile.id)
       try {
-        const threadsList = await textile.threads.list()
-        requestedThreadsSuccess(threadsList)
+        const streamsList = await textile.threads.list()
+        console.log('streamsList', streamsList)
+        requestedStreamsSuccess(streamsList)
       } catch (error) {
-        requestedThreadsError(error)
+        requestedStreamsError(error)
       }
     }
 
@@ -34,21 +35,21 @@ const Home = ({
   return (
     <Fragment>
       <h3>Streams</h3>
-      <ThreadList threads={threads.items} />
+      <StreamList streams={streams.items} />
     </Fragment>
   )
 }
 
-const mapStateToProps = ({ threads, profile }) => ({
-  threads,
+const mapStateToProps = ({ streams, profile }) => ({
+  streams,
   profile,
 })
 
 export default connect(
   mapStateToProps,
   {
-    requestingThreads,
-    requestedThreadsSuccess,
-    requestedThreadsError,
+    requestedStreams,
+    requestedStreamsSuccess,
+    requestedStreamsError,
   }
 )(Home)

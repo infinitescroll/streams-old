@@ -1,5 +1,5 @@
 const initialState = {
-  threads: {
+  streams: {
     items: {},
     requesting: false,
     requestingSuccess: false,
@@ -15,70 +15,72 @@ const initialState = {
     id: '',
   },
   forms: {
-    newThread: '',
+    stream: {
+      name: '',
+    },
   },
 }
 
 const initialPeerState = {
-  threads: new Set(),
-  requestingNewThread: false,
-  requestedNewThreadSuccess: false,
-  requestedNewThreadError: false,
+  streams: new Set(),
+  requestingNewStream: false,
+  requestedNewStreamSuccess: false,
+  requestedNewStreamError: false,
   error: null,
 }
 
-export const requestedNewThread = (state = initialState, peerId) => {
+export const requestedNewStream = (state = initialState, peerId) => {
   return {
     ...state,
     peers: {
       ...state.peers,
       [peerId]: {
         ...state.peers[peerId],
-        requestingNewThread: true,
-        requestedNewThreadSuccess: false,
-        requestedNewThreadError: false,
+        requestingNewStream: true,
+        requestedNewStreamSuccess: false,
+        requestedNewStreamError: false,
         error: null,
       },
     },
   }
 }
 
-export const requestedNewThreadSuccess = (state, peerId, thread) => {
-  const { id } = thread
-  const threads = state.peers[peerId].threads
+export const requestedNewStreamSuccess = (state, peerId, stream) => {
+  const { id } = stream
+  const streams = state.peers[peerId].streams
   return {
     ...state,
     peers: {
       ...state.peers,
       [peerId]: {
         ...state.peers[peerId],
-        threads: threads.add(id),
-        requestingNewThread: false,
-        requestedNewThreadSuccess: true,
-        requestedNewThreadError: false,
+        streams: streams.add(id),
+        requestingNewStream: false,
+        requestedNewStreamSuccess: true,
+        requestedNewStreamError: false,
         error: null,
       },
     },
-    threads: {
-      ...state.threads,
+    streams: {
+      ...state.streams,
       items: {
-        ...state.threads.items,
-        [id]: thread,
+        ...state.streams.items,
+        [id]: stream,
       },
     },
   }
 }
 
-export const requestedNewThreadError = (state, peerId, error) => {
+export const requestedNewStreamError = (state, peerId, error) => {
   return {
     ...state,
     peers: {
       ...state.peers,
       [peerId]: {
         ...state.peers[peerId],
-        requestingNewThread: false,
-        requestedNewThreadSuccess: false,
-        requestedNewThreadError: true,
+        requestingNewStream: false,
+        requestedNewStreamSuccess: false,
+        requestedNewStreamError: true,
         error,
       },
     },
@@ -122,10 +124,10 @@ export const requestedProfileError = (state, error) => ({
   },
 })
 
-export const requestedThreads = state => ({
+export const requestedStreams = state => ({
   ...state,
-  threads: {
-    ...state.threads,
+  streams: {
+    ...state.streams,
     requesting: true,
     requestedSuccess: false,
     requestedError: false,
@@ -133,7 +135,7 @@ export const requestedThreads = state => ({
   },
 })
 
-const constructThreads = items => {
+const constructStreams = items => {
   const obj = {}
   items.forEach(item => {
     obj[item.id] = item
@@ -142,25 +144,25 @@ const constructThreads = items => {
   return obj
 }
 
-export const requestedThreadsSuccess = (state, threads) => {
-  const constructedThreads = constructThreads(threads.items)
+export const requestedStreamsSuccess = (state, streams) => {
+  const constructedStreams = constructStreams(streams.items)
   return {
     ...state,
-    threads: {
-      ...state.threads,
+    streams: {
+      ...state.streams,
       requesting: false,
       requestedSuccess: true,
       requestedError: false,
       items: {
-        ...state.threads.items,
-        ...constructedThreads,
+        ...state.streams.items,
+        ...constructedStreams,
       },
       error: null,
     },
   }
 }
 
-export const requestedThreadsError = (state, error) => ({
+export const requestedStreamsError = (state, error) => ({
   ...state,
   profile: {
     ...state.profile,

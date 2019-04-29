@@ -3,47 +3,47 @@ import { Col, Row, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
-  requestingNewThread,
-  requestedNewThreadSuccess,
-  requestedNewThreadError,
+  requestedNewStream,
+  requestedNewStreamSuccess,
+  requestedNewStreamError,
 } from '../store/actions'
 import { textile } from '../textile'
 import '../styles/index.scss'
-import { Input, ThreadList } from '../components/'
+import { Input, StreamList } from '../components/'
 
 const Streams = ({
-  requestingNewThread,
-  requestedNewThreadSuccess,
-  requestedNewThreadError,
+  requestedNewStream,
+  requestedNewStreamSuccess,
+  requestedNewStreamError,
   profile,
   forms,
 }) => {
-  const createThread = async () => {
-    requestingNewThread(profile.id)
+  const createStream = async () => {
+    requestedNewStream(profile.id)
     try {
-      const newThread = await textile.threads.add(forms.newThread)
-      requestedNewThreadSuccess(profile.id, newThread)
+      const newStream = await textile.threads.add(forms.newStream)
+      requestedNewStreamSuccess(profile.id, newStream)
     } catch (error) {
-      requestedNewThreadError(profile.id, error)
+      requestedNewStreamError(profile.id, error)
     }
   }
   return (
     <Row className="custom-container">
       <Col lg={8} lgoffset={4}>
-        <Input controlLabel="New Thread" name="newThread" />
+        <Input controlLabel="New Stream" name="newStream" />
       </Col>
       <Col lg={4}>
-        <Button onClick={createThread}>Add</Button>
+        <Button onClick={createStream}>Add</Button>
       </Col>
-      <ThreadList />
+      <StreamList />
     </Row>
   )
 }
 
 Streams.propTypes = {
-  requestingNewThread: PropTypes.func.isRequired,
-  requestedNewThreadSuccess: PropTypes.func.isRequired,
-  requestedNewThreadError: PropTypes.func.isRequired,
+  requestedNewStream: PropTypes.func.isRequired,
+  requestedNewStreamSuccess: PropTypes.func.isRequired,
+  requestedNewStreamError: PropTypes.func.isRequired,
   profile: PropTypes.object,
 }
 
@@ -60,8 +60,8 @@ const mapStateToProps = ({ peers, profile, forms }) => ({
 export default connect(
   mapStateToProps,
   {
-    requestingNewThread,
-    requestedNewThreadSuccess,
-    requestedNewThreadError,
+    requestedNewStream,
+    requestedNewStreamSuccess,
+    requestedNewStreamError,
   }
 )(Streams)
