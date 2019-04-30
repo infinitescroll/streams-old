@@ -10,19 +10,24 @@ import {
 } from '../../store/actions'
 
 const ValidateTextile = props => {
+  const {
+    requestingProfile,
+    requestedProfileSuccess,
+    requestedProfileError,
+  } = props
   useEffect(() => {
     const getProfile = async () => {
-      props.requestingProfile()
+      requestingProfile()
       try {
         const textileProfile = await textile.profile.get()
-        props.requestedProfileSuccess(textileProfile)
+        requestedProfileSuccess(textileProfile)
       } catch (error) {
-        props.requestedProfileError(error)
+        requestedProfileError(error)
       }
     }
 
     getProfile()
-  }, [])
+  }, [requestingProfile, requestedProfileSuccess, requestedProfileError])
 
   if (!props.profile.id && props.profile.requested)
     console.log('TEXTILE NODE PROBABLY NOT RUNNING')

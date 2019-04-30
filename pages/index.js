@@ -30,7 +30,12 @@ const Home = ({
     }
 
     loadThreads()
-  }, [])
+  }, [
+    requestedStreams,
+    requestedStreamsSuccess,
+    requestedStreamsError,
+    profile.id,
+  ])
 
   return (
     <Fragment>
