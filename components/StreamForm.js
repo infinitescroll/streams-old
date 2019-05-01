@@ -1,8 +1,6 @@
 import React from 'react'
 import { Col, Row, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { changedStreamInput } from '../store/actions'
 import '../styles/index.scss'
 import { Input } from '../components/'
 
@@ -107,15 +105,4 @@ StreamForm.defaultProps = {
   buttonText: 'Submit',
 }
 
-const mapStateToProps = ({ peers, profile, forms }) => ({
-  peers,
-  profile,
-  forms,
-})
-
-export default connect(
-  mapStateToProps,
-  {
-    changedStreamInput,
-  }
-)(StreamForm)
+export default StreamForm

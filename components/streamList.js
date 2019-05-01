@@ -1,5 +1,6 @@
 import { Row, Col, Card } from 'react-bootstrap'
 import React, { Fragment } from 'react'
+import Link from 'next/link'
 
 const StreamList = ({ streams }) => {
   return (
@@ -9,9 +10,11 @@ const StreamList = ({ streams }) => {
           {!!streams &&
             Object.keys(streams).map((id, index) => {
               return (
-                <Card key={id}>
-                  <div>{streams[id].name}</div>
-                </Card>
+                <Link href={'/streams/' + id} key={id}>
+                  <Card>
+                    <div>{streams[id].name}</div>
+                  </Card>
+                </Link>
               )
             })}
         </Col>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormGroup, FormControl, FormLabel } from 'react-bootstrap'
+import { FormControl, FormLabel } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { changedInput } from '../store/actions'
@@ -7,16 +7,14 @@ import { changedInput } from '../store/actions'
 const Input = ({ onChange, type, name, controlLabel, value, checked }) => {
   return (
     <div>
-      <FormGroup controlId="formBasicText">
-        <FormLabel>{controlLabel}</FormLabel>
-        <FormControl
-          type={type || 'Text'}
-          value={value}
-          name={name}
-          onChange={onChange}
-          checked={checked}
-        />
-      </FormGroup>
+      <FormLabel>{controlLabel}</FormLabel>
+      <FormControl
+        type={type || 'Text'}
+        value={value}
+        name={name}
+        onChange={onChange}
+        checked={checked}
+      />
     </div>
   )
 }

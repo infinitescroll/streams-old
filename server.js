@@ -13,6 +13,10 @@ app.prepare().then(() => {
     return app.render(req, res, '/a', req.query)
   })
 
+  server.get('/streams/:id', (req, res) => {
+    return app.render(req, res, '/streams/view', { id: req.params.id })
+  })
+
   server.get('*', (req, res) => {
     return handle(req, res)
   })

@@ -2,6 +2,9 @@ import {
   REQUESTED_PROFILE,
   REQUESTED_PROFILE_SUCCESS,
   REQUESTED_PROFILE_ERROR,
+  REQUESTED_STREAM,
+  REQUESTED_STREAM_SUCCESS,
+  REQUESTED_STREAM_ERROR,
   REQUESTED_STREAMS,
   REQUESTED_STREAMS_SUCCESS,
   REQUESTED_STREAMS_ERROR,
@@ -40,6 +43,20 @@ export const requestedNewStreamSuccess = (address, streamId) => ({
 export const requestedNewStreamError = (address, error) => ({
   type: REQUESTED_NEW_STREAM_ERROR,
   meta: { address },
+  error,
+})
+
+export const requestedStream = () => ({
+  type: REQUESTED_STREAM,
+})
+
+export const requestedStreamSuccess = stream => ({
+  type: REQUESTED_STREAM_SUCCESS,
+  payload: { stream },
+})
+
+export const requestedStreamError = error => ({
+  type: REQUESTED_STREAM_ERROR,
   error,
 })
 

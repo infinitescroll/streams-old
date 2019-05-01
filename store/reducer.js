@@ -7,6 +7,9 @@ import initialState, {
   requestedNewStream,
   requestedNewStreamSuccess,
   requestedNewStreamError,
+  requestedStream,
+  requestedStreamSuccess,
+  requestedStreamError,
   requestedStreams,
   requestedStreamsSuccess,
   requestedStreamsError,
@@ -17,6 +20,9 @@ import {
   REQUESTED_PROFILE,
   REQUESTED_PROFILE_SUCCESS,
   REQUESTED_PROFILE_ERROR,
+  REQUESTED_STREAM,
+  REQUESTED_STREAM_SUCCESS,
+  REQUESTED_STREAM_ERROR,
   REQUESTED_NEW_STREAM,
   REQUESTED_NEW_STREAM_SUCCESS,
   REQUESTED_NEW_STREAM_ERROR,
@@ -54,6 +60,15 @@ export const reducer = (state = initialState, action) => {
         action.meta.address,
         action.error
       )
+    }
+    case REQUESTED_STREAM: {
+      return requestedStream(_.cloneDeep(state))
+    }
+    case REQUESTED_STREAM_SUCCESS: {
+      return requestedStreamSuccess(_.cloneDeep(state), action.payload.stream)
+    }
+    case REQUESTED_STREAM_ERROR: {
+      return requestedStreamError(_.cloneDeep(state), action.error)
     }
     case REQUESTED_STREAMS: {
       return requestedStreams(_.cloneDeep(state))

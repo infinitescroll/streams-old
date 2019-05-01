@@ -1,16 +1,16 @@
 const initialState = {
   streams: {
     items: {},
-    requesting: false,
-    requestingSuccess: false,
-    requestingError: false,
+    requested: false,
+    requestedSuccess: false,
+    requestedError: false,
     error: null,
   },
   peers: {},
   profile: {
-    requesting: false,
-    requestingSuccess: false,
-    requestingError: false,
+    requested: false,
+    requestedSuccess: false,
+    requestedError: false,
     error: null,
     id: '',
   },
@@ -26,7 +26,7 @@ const initialState = {
 
 const initialPeerState = {
   streams: new Set(),
-  requestingNewStream: false,
+  requestedNewStream: false,
   requestedNewStreamSuccess: false,
   requestedNewStreamError: false,
   error: null,
@@ -39,7 +39,7 @@ export const requestedNewStream = (state = initialState, peerId) => {
       ...state.peers,
       [peerId]: {
         ...state.peers[peerId],
-        requestingNewStream: true,
+        requestedNewStream: true,
         requestedNewStreamSuccess: false,
         requestedNewStreamError: false,
         error: null,
@@ -58,7 +58,7 @@ export const requestedNewStreamSuccess = (state, peerId, stream) => {
       [peerId]: {
         ...state.peers[peerId],
         streams: streams.add(id),
-        requestingNewStream: false,
+        requestedNewStream: false,
         requestedNewStreamSuccess: true,
         requestedNewStreamError: false,
         error: null,
@@ -81,9 +81,54 @@ export const requestedNewStreamError = (state, peerId, error) => {
       ...state.peers,
       [peerId]: {
         ...state.peers[peerId],
-        requestingNewStream: false,
+        requestedNewStream: false,
         requestedNewStreamSuccess: false,
         requestedNewStreamError: true,
+        error,
+      },
+    },
+  }
+}
+
+export const requestedStream = (state = initialState, id) => {
+  return {
+    ...state,
+    streams: {
+      ...state.streams,
+      [id]: {
+        ...state.streams[id],
+        requestedStream: true,
+        requestedStreamSuccess: false,
+        requestedStreamError: false,
+      },
+    },
+  }
+}
+
+export const requestedStreamSuccess = (state, stream) => {
+  const { id } = stream
+  return {
+    ...state,
+    streams: {
+      ...state.streams,
+      items: {
+        ...state.streams.items,
+        [id]: stream,
+      },
+    },
+  }
+}
+
+export const requestedStreamError = (state, id, error) => {
+  return {
+    ...state,
+    streams: {
+      ...state.streams,
+      [id]: {
+        ...state.streams[id],
+        requestedStream: false,
+        requestedStreamSuccess: false,
+        requestedStreamError: true,
         error,
       },
     },
@@ -94,7 +139,7 @@ export const requestedProfile = state => ({
   ...state,
   profile: {
     ...state.profile,
-    requesting: true,
+    requested: true,
     requestedSuccess: false,
     requestedError: false,
     error: null,
@@ -105,7 +150,7 @@ export const requestedProfileSuccess = (state, profile) => ({
   ...state,
   profile: {
     ...state.profile,
-    requesting: false,
+    requested: false,
     requestedSuccess: true,
     requestedError: false,
     ...profile,
@@ -120,7 +165,7 @@ export const requestedProfileError = (state, error) => ({
   ...state,
   profile: {
     ...state.profile,
-    requesting: false,
+    requested: false,
     requestedSuccess: false,
     requestedError: true,
     error,
@@ -131,7 +176,7 @@ export const requestedStreams = state => ({
   ...state,
   streams: {
     ...state.streams,
-    requesting: true,
+    requested: true,
     requestedSuccess: false,
     requestedError: false,
     error: null,
@@ -153,7 +198,7 @@ export const requestedStreamsSuccess = (state, streams) => {
     ...state,
     streams: {
       ...state.streams,
-      requesting: false,
+      requested: false,
       requestedSuccess: true,
       requestedError: false,
       items: {
@@ -169,7 +214,7 @@ export const requestedStreamsError = (state, error) => ({
   ...state,
   profile: {
     ...state.profile,
-    requesting: false,
+    requested: false,
     requestedSuccess: false,
     requestedError: true,
     error,
