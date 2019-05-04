@@ -37,10 +37,7 @@ const View = ({
   const onSubmit = async () => {
     requestedNewMessage()
     try {
-      const message = await streamService.createMessage(
-        id,
-        forms.streams[id].message
-      )
+      await streamService.createMessage(id, forms.streams[id].message)
       requestedNewMessageSuccess()
     } catch (error) {
       requestedNewMessageError(error)
