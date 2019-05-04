@@ -28,8 +28,7 @@ const Home = ({
         requestedStreamsError(error)
       }
     }
-
-    loadThreads()
+    if (profile.id) loadThreads()
   }, [
     requestedStreams,
     requestedStreamsSuccess,
