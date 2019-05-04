@@ -13,6 +13,9 @@ import initialState, {
   requestedStreams,
   requestedStreamsSuccess,
   requestedStreamsError,
+  requestedMessage,
+  requestedMessageSuccess,
+  requestedMessageError,
   changedInput,
   changedMessageInput,
   changedStreamInput,
@@ -30,6 +33,9 @@ import {
   REQUESTED_STREAMS,
   REQUESTED_STREAMS_SUCCESS,
   REQUESTED_STREAMS_ERROR,
+  REQUESTED_MESSAGE,
+  REQUESTED_MESSAGE_SUCCESS,
+  REQUESTED_MESSAGE_ERROR,
   CHANGED_INPUT,
   CHANGED_MESSAGE_INPUT,
   CHANGED_STREAM_INPUT,
@@ -80,6 +86,15 @@ export const reducer = (state = initialState, action) => {
     }
     case REQUESTED_STREAMS_ERROR: {
       return requestedStreamsError(_.cloneDeep(state), action.error)
+    }
+    case REQUESTED_MESSAGE: {
+      return requestedMessage(_.cloneDeep(state))
+    }
+    case REQUESTED_MESSAGE_SUCCESS: {
+      return requestedMessageSuccess(_.cloneDeep(state), action.payload.message)
+    }
+    case REQUESTED_MESSAGE_ERROR: {
+      return requestedMessageError(_.cloneDeep(state), action.error)
     }
     case CHANGED_INPUT: {
       return changedInput(_.cloneDeep(state), action.name, action.value)

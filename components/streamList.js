@@ -11,11 +11,9 @@ const StreamList = ({ streams }) => {
             Object.keys(streams).map((id, index) => {
               return (
                 <Link href={'/streams/' + id} key={id}>
-                  <Card>
-                    <a>
-                      <div>{streams[id].name}</div>
-                    </a>
-                  </Card>
+                  <a>
+                    <Card>{streams[id].name}</Card>
+                  </a>
                 </Link>
               )
             })}

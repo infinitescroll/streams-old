@@ -1,3 +1,4 @@
+import { Card } from 'react-bootstrap'
 import React, { useEffect } from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
@@ -37,8 +38,11 @@ const View = ({
   const onSubmit = async () => {
     requestedNewMessage()
     try {
-      await streamService.createMessage(id, forms.streams[id].message)
-      requestedNewMessageSuccess()
+      const message = await streamService.createMessage(
+        id,
+        forms.streams[id].message
+      )
+      requestedNewMessageSuccess(message)
     } catch (error) {
       requestedNewMessageError(error)
     }
@@ -49,6 +53,7 @@ const View = ({
       requestedStream()
       try {
         const stream = await streamService.get(id)
+        stream.feed = await streamService.getFeed(id)
         requestedStreamSuccess(stream)
       } catch (error) {
         requestedStreamError(error)
@@ -63,6 +68,19 @@ const View = ({
       </Link>
       <div>{streams.items[id] ? streams.items[id].name : '...'}</div>
       <MessageInput onChange={onChange} onSubmit={onSubmit} />
+      {!!streams.items[id] &&
+        streams.items[id].feed.items.map((block, _) => {
+          return (
+            <Link
+              href={'/streams/' + id + '/messages/' + block.block}
+              key={block.block}
+            >
+              <a>
+                <Card>{block.payload.caption}</Card>
+              </a>
+            </Link>
+          )
+        })}
     </div>
   )
 }

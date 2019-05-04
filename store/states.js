@@ -6,6 +6,13 @@ const initialState = {
     requestedError: false,
     error: null,
   },
+  messages: {
+    items: {},
+    requested: false,
+    requestedSuccess: false,
+    requestedError: false,
+    error: null,
+  },
   peers: {},
   profile: {
     requested: false,
@@ -130,6 +137,52 @@ export const requestedStreamError = (state, id, error) => {
         requestedStream: false,
         requestedStreamSuccess: false,
         requestedStreamError: true,
+        error,
+      },
+    },
+  }
+}
+
+export const requestedMessage = (state = initialState, id) => {
+  return {
+    ...state,
+    messages: {
+      ...state.messages,
+      [id]: {
+        ...state.messages[id],
+        requestedStream: true,
+        requestedStreamSuccess: false,
+        requestedStreamError: false,
+      },
+    },
+  }
+}
+
+export const requestedMessageSuccess = (state, message) => {
+  const { id } = message
+  console.log('message', message)
+  return {
+    ...state,
+    messages: {
+      ...state.messages,
+      items: {
+        ...state.messages.items,
+        [id]: message,
+      },
+    },
+  }
+}
+
+export const requestedMessageError = (state, id, error) => {
+  return {
+    ...state,
+    messages: {
+      ...state.messages,
+      [id]: {
+        ...state.messages[id],
+        requestedMessage: false,
+        requestedMessageSuccess: false,
+        requestedMessageError: true,
         error,
       },
     },

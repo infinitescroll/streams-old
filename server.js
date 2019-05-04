@@ -21,6 +21,13 @@ app.prepare().then(() => {
     return app.render(req, res, '/streams/view', { id: req.params.id })
   })
 
+  server.get('/streams/:streamId/messages/:messageId', (req, res) => {
+    return app.render(req, res, '/streams/messages/view', {
+      streamId: req.params.streamId,
+      messageId: req.params.messageId,
+    })
+  })
+
   server.get('*', (req, res) => {
     return handle(req, res)
   })
