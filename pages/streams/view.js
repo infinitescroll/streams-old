@@ -1,6 +1,7 @@
 import { Card } from 'react-bootstrap'
 import React, { useEffect } from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
@@ -57,6 +58,7 @@ const View = ({
         requestedStreamSuccess(stream)
       } catch (error) {
         requestedStreamError(error)
+        Router.replace('/error')
       }
     }
     getStream()
