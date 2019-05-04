@@ -3,6 +3,7 @@ import { Row } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
+  changedStreamInput,
   requestedNewStream,
   requestedNewStreamSuccess,
   requestedNewStreamError,
@@ -11,6 +12,7 @@ import { streamService } from '../../lib/streamService.js'
 import { StreamForm } from '../../components'
 
 const CreateStream = ({
+  changedStreamInput,
   requestedNewStream,
   requestedNewStreamSuccess,
   requestedNewStreamError,
@@ -32,6 +34,8 @@ const CreateStream = ({
         onSubmit={createStream}
         title="Create Stream"
         buttonText="Create"
+        forms={forms}
+        changedStreamInput={changedStreamInput}
       />
     </Row>
   )
@@ -57,6 +61,7 @@ const mapStateToProps = ({ peers, profile, forms }) => ({
 export default connect(
   mapStateToProps,
   {
+    changedStreamInput,
     requestedNewStream,
     requestedNewStreamSuccess,
     requestedNewStreamError,

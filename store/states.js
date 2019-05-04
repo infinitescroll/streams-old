@@ -21,6 +21,7 @@ const initialState = {
       sharing: '',
       disabled: false,
     },
+    streams: {},
   },
 }
 
@@ -236,6 +237,20 @@ export const changedStreamInput = (state, name, val) => ({
     stream: {
       ...state.forms.stream,
       [name]: val,
+    },
+  },
+})
+
+export const changedMessageInput = (state, streamId, val) => ({
+  ...state,
+  forms: {
+    ...state.forms,
+    streams: {
+      ...state.forms.streams,
+      [streamId]: {
+        ...state.forms.streams[streamId],
+        message: val,
+      },
     },
   },
 })

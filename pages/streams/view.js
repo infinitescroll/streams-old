@@ -3,22 +3,52 @@ import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
-  changedStreamInput,
   requestedStream,
   requestedStreamSuccess,
   requestedStreamError,
+  changedMessageInput,
+  requestedNewMessage,
+  requestedNewMessageSuccess,
+  requestedNewMessageError,
 } from '../../store/actions'
 import { streamService } from '../../lib/streamService.js'
+import { MessageInput } from '../../components/'
 
 const View = ({
+  changedMessageInput,
   requestedStream,
   requestedStreamSuccess,
   requestedStreamError,
+  requestedNewMessage,
+  requestedNewMessageSuccess,
+  requestedNewMessageError,
   id,
   streams,
+  forms,
 }) => {
+  const onChange = e => {
+    const value =
+      !!forms.streams[id] && forms.streams[id].message === e.target.value
+        ? ''
+        : e.target.value
+    changedMessageInput(id, value)
+  }
+
+  const onSubmit = async () => {
+    requestedNewMessage()
+    try {
+      const message = await streamService.createMessage(
+        id,
+        forms.streams[id].message
+      )
+      requestedNewMessageSuccess()
+    } catch (error) {
+      requestedNewMessageError(error)
+    }
+  }
+
   useEffect(() => {
-    const getStreams = async () => {
+    const getStream = async () => {
       requestedStream()
       try {
         const stream = await streamService.get(id)
@@ -27,12 +57,15 @@ const View = ({
         requestedStreamError(error)
       }
     }
-    getStreams()
+    getStream()
   }, [id, requestedStream, requestedStreamError, requestedStreamSuccess])
   return (
     <div>
-      <Link href="/">home</Link>
-      stream {streams.items[id] ? streams.items[id].name : '...'}
+      <Link href="/">
+        <a>Home</a>
+      </Link>
+      <div>{streams.items[id] ? streams.items[id].name : '...'}</div>
+      <MessageInput onChange={onChange} onSubmit={onSubmit} />
     </div>
   )
 }
@@ -51,8 +84,7 @@ View.defaultProps = {
   profile: {},
 }
 
-const mapStateToProps = ({ peers, forms, streams }) => ({
-  peers,
+const mapStateToProps = ({ forms, streams }) => ({
   forms,
   streams,
 })
@@ -60,9 +92,12 @@ const mapStateToProps = ({ peers, forms, streams }) => ({
 export default connect(
   mapStateToProps,
   {
-    changedStreamInput,
     requestedStream,
     requestedStreamSuccess,
     requestedStreamError,
+    changedMessageInput,
+    requestedNewMessage,
+    requestedNewMessageSuccess,
+    requestedNewMessageError,
   }
 )(View)

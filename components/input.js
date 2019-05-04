@@ -1,8 +1,6 @@
 import React from 'react'
 import { FormControl, FormLabel } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { changedInput } from '../store/actions'
 
 const Input = ({ onChange, type, name, controlLabel, value, checked }) => {
   return (
@@ -26,7 +24,4 @@ Input.propTypes = {
   value: PropTypes.string,
 }
 
-export default connect(
-  null,
-  { changedInput }
-)(Input)
+export default Input

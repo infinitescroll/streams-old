@@ -12,7 +12,9 @@ const StreamList = ({ streams }) => {
               return (
                 <Link href={'/streams/' + id} key={id}>
                   <Card>
-                    <div>{streams[id].name}</div>
+                    <a>
+                      <div>{streams[id].name}</div>
+                    </a>
                   </Card>
                 </Link>
               )

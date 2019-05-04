@@ -13,6 +13,13 @@ import {
   REQUESTED_NEW_STREAM_ERROR,
   CHANGED_INPUT,
   CHANGED_STREAM_INPUT,
+  CHANGED_MESSAGE_INPUT,
+  REQUESTED_NEW_MESSAGE,
+  REQUESTED_NEW_MESSAGE_SUCCESS,
+  REQUESTED_NEW_MESSAGE_ERROR,
+  REQUESTED_MESSAGE,
+  REQUESTED_MESSAGE_SUCCESS,
+  REQUESTED_MESSAGE_ERROR,
 } from './actionTypes'
 
 export const requestingProfile = () => ({
@@ -74,14 +81,48 @@ export const requestedStreamsError = error => ({
   error,
 })
 
-export const changedInput = (name, val) => ({
+export const changedInput = (name, value) => ({
   type: CHANGED_INPUT,
   name,
-  val,
+  value,
 })
 
-export const changedStreamInput = (name, val) => ({
+export const changedStreamInput = (name, value) => ({
   type: CHANGED_STREAM_INPUT,
   name,
-  val,
+  value,
+})
+
+export const changedMessageInput = (streamId, value) => ({
+  type: CHANGED_MESSAGE_INPUT,
+  streamId,
+  value,
+})
+
+export const requestedNewMessage = () => ({
+  type: REQUESTED_NEW_MESSAGE,
+})
+
+export const requestedNewMessageSuccess = message => ({
+  type: REQUESTED_NEW_MESSAGE_SUCCESS,
+  payload: { message },
+})
+
+export const requestedNewMessageError = error => ({
+  type: REQUESTED_NEW_MESSAGE_ERROR,
+  error,
+})
+
+export const requestedMessage = () => ({
+  type: REQUESTED_MESSAGE,
+})
+
+export const requestedMessageSuccess = message => ({
+  type: REQUESTED_MESSAGE_SUCCESS,
+  payload: { message },
+})
+
+export const requestedMessageError = error => ({
+  type: REQUESTED_MESSAGE_ERROR,
+  error,
 })
