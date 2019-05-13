@@ -13,12 +13,20 @@ app.prepare().then(() => {
     return app.render(req, res, '/a', req.query)
   })
 
+  server.get('/streams/invite', (req, res) => {
+    return app.render(req, res, '/streams/invite')
+  })
+
   server.get('/streams/create', (req, res) => {
     return app.render(req, res, '/streams/create')
   })
 
   server.get('/streams/:id', (req, res) => {
     return app.render(req, res, '/streams/view', { id: req.params.id })
+  })
+
+  server.get('/auth/github/callback', (req, res) => {
+    return app.render(req, res, '/streams/invite', { code: req.query.code })
   })
 
   server.get('*', (req, res) => {

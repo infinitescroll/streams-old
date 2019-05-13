@@ -3,4 +3,5 @@ node_modules/
 *.log
 *.swp
 *.swo
+secrets.js
 
