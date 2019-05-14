@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { Button, Container, Form, FormLabel } from 'react-bootstrap'
-import fetch from 'isomorphic-unfetch'
+import axios from 'axios'
 
 import {
   requestedStreams,
@@ -66,8 +66,25 @@ const Invite = ({
       </Button>
       <Button
         onClick={async () => {
+          const peerId = await streamService.getPeerId()
+          const data = await axios.post(
+            `http://localhost:3001/api/v0/auth/github/callback?code=${code}&peerId=${peerId}`,
+            { peerId },
+            {
+              headers: {
+                'Access-Control-Allow-Origin': '*',
+              },
+            }
+          )
+          // console.log(data)
+        }}
+      >
+        Send github creds to server
+      </Button>
+      <Button
+        onClick={async () => {
           const streamId =
-            '12D3KooWNutEVpx3Pd3DU1FuvJnfsgPDB2kRrSXnQjAWfoPP7FBw'
+            '12D3KooWKZTFokC5arER47VfcGuPgdoEKLEFEJYGg8qNEHUKPj5T'
           await streamService.addWebhook(streamId)
         }}
       >
@@ -75,14 +92,20 @@ const Invite = ({
       </Button>
       <Button
         onClick={async () => {
-          const streamId =
-            '12D3KooWNutEVpx3Pd3DU1FuvJnfsgPDB2kRrSXnQjAWfoPP7FBw'
-          await fetch(
-            `http://localhost:3001/api/v0/auth/github/callback?code=${code}&streamId=${streamId}`
+          const peerId = await streamService.getPeerId()
+          const data = await axios.post(
+            `http://localhost:3001/api/v0/streams/create/webhook`,
+            { peerId },
+            {
+              headers: {
+                'Access-Control-Allow-Origin': '*',
+              },
+            }
           )
+          // console.log(data)
         }}
       >
-        Store access token
+        Make request to add third party apps
       </Button>
     </Container>
   )

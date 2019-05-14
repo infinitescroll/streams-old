@@ -17,9 +17,19 @@ export default {
         description: 'The data associated with the stream event',
         type: 'object',
       },
-      file: {
+      files: {
         description: 'The root hash of an IPFS file(s) DAG',
-        type: 'string',
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            cid: {
+              type: 'string',
+            },
+          },
+          required: ['cid'],
+        },
+        uniqueItems: true,
       },
     },
     required: ['type', 'data'],
